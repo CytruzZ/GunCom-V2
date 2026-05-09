@@ -177,11 +177,11 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label class="form-label">Kit Name</label>
-                                <input type="text" class="form-control" name="kit_name" value="{{ $build->kit_name }}" required>
+                                <input type="text" class="form-control" name="kit_name" value="{{ $build->kit_name }}" disabled>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Grade</label>
-                                <select class="form-select" name="grade" required>
+                                <select class="form-select" name="grade" disabled>
                                     <option value="SD" {{ $build->grade == 'SD' ? 'selected' : '' }}>Super Deformed (SD)</option>
                                     <option value="HG" {{ $build->grade == 'HG' ? 'selected' : '' }}>High Grade (HG)</option>
                                     <option value="RG" {{ $build->grade == 'RG' ? 'selected' : '' }}>Real Grade (RG)</option>
@@ -225,11 +225,11 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label class="form-label">Kit Name</label>
-                                <input type="text" class="form-control" name="kit_name" value="{{ $build->kit_name }}" required>
+                                <input type="text" class="form-control" name="kit_name" value="{{ $build->kit_name }}" disabled>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Grade</label>
-                                <select class="form-select" name="grade" required>
+                                <select class="form-select" name="grade" disabled>
                                     <option value="SD" {{ $build->grade == 'SD' ? 'selected' : '' }}>Super Deformed (SD)</option>
                                     <option value="HG" {{ $build->grade == 'HG' ? 'selected' : '' }}>High Grade (HG)</option>
                                     <option value="RG" {{ $build->grade == 'RG' ? 'selected' : '' }}>Real Grade (RG)</option>

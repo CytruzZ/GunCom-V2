@@ -38,10 +38,10 @@
 							<div class="bg-mode px-4 py-3 rounded">
 								<div class="d-flex align-items-center justify-content-between">
 									<!-- Card title -->
-									<h1 class="h4 mb-0">{{ $showcases->count() }} Posts</h1>
+									<h1 class="h4 mb-0">{{ $showcases->count() }} Showcases</h1>
 									<!-- Button modal -->
 									@if(auth()->id() === $profileUser?->id)
-									<a class="btn btn-primary-soft mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modalPost"> <i class="fa-solid fa-plus me-1"></i> Create post</a>
+									<a class="btn btn-primary-soft mb-0" href="#" data-bs-toggle="modal" data-bs-target="#modalPost"> <i class="fa-solid fa-plus me-1"></i> Create showcase</a>
 									@endif
 								</div>
 							</div>
@@ -84,12 +84,12 @@
                                         <i class="fa-solid fa-camera fa-4x text-secondary mb-3"></i>
 										@if(auth()->id() === $profileUser?->id)
                                         <h5 class="mb-1">Tampilkan Koleksi Gunpla Anda</h5>
-                                        <p class="text-muted small">Postingan dengan gambar yang Anda unggah akan muncul di grid bergaya showcase ini.</p>
+                                        <p class="text-muted small">Showcase dengan gambar yang Anda unggah akan muncul di grid bergaya showcase ini.</p>
                                         <div class="mt-2 text-center">
-                                            <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalPost">Postingan Pertama Anda</a>
+                                            <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalPost">Showcase Pertama Anda</a>
                                         </div>
 										@else
-										<h5 class="mb-1">Belum ada postingan</h5>
+										<h5 class="mb-1">Belum ada showcase</h5>
                                         <p class="text-muted small">Pengguna ini belum mengunggah showcase apapun.</p>
 										@endif
                                     </div>

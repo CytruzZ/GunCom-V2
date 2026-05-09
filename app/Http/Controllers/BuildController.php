@@ -49,8 +49,6 @@ class BuildController extends Controller
         $project = BuildProject::where('user_id', auth()->id())->findOrFail($id);
 
         $validated = $request->validate([
-            'kit_name' => 'required|string|max:255',
-            'grade' => 'required|string|max:50',
             'percentage' => 'required|integer|min:0|max:100',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
         ]);
@@ -58,8 +56,6 @@ class BuildController extends Controller
         $status = $validated['percentage'] == 100 ? 'completed' : 'ongoing';
 
         $data = [
-            'kit_name' => $validated['kit_name'],
-            'grade' => $validated['grade'],
             'percentage' => $validated['percentage'],
             'status' => $status,
         ];

@@ -26,7 +26,7 @@
                         <!-- User stat item -->
                         <div>
                             <h6 class="mb-0">{{ $profileUser?->showcases()->count() ?? 0 }}</h6>
-                            <small>Post</small>
+                            <small>Showcase</small>
                         </div>
                     </div>
 
@@ -62,7 +62,7 @@
                 <a class="nav-link {{ Route::is('my-profile') || Route::is('user.profile') ? 'active fw-bold' : '' }}" href="{{ isset($user) ? route('user.profile', $user->id) : route('my-profile') }}">Profile</a>
             </li>
             <li class="nav-item"> 
-                <a class="nav-link {{ Route::is('my-profile.posts') || Route::is('user.posts') ? 'active fw-bold' : '' }}" href="{{ isset($user) ? route('user.posts', $user->id) : route('my-profile.posts') }}">{{ $profileUser?->showcases()->count() ?? 0 }} Posts</a>
+                <a class="nav-link {{ Route::is('my-profile.posts') || Route::is('user.posts') ? 'active fw-bold' : '' }}" href="{{ isset($user) ? route('user.posts', $user->id) : route('my-profile.posts') }}">{{ $profileUser?->showcases()->count() ?? 0 }} Showcases</a>
             </li>
             <li class="nav-item"> 
                 <a class="nav-link {{ Route::is('my-profile.forum') || Route::is('user.forum') ? 'active fw-bold' : '' }}" href="{{ isset($user) ? route('user.forum', $user->id) : route('my-profile.forum') }}">{{ $profileUser?->forums()->count() ?? 0 }} Forums</a>
@@ -88,20 +88,8 @@
 				</div>
 
 				<!-- Modal header START -->
-				<div class="modal-header d-block">
-					<div class="d-flex justify-content-between align-items-center">
-						<!-- Title -->
-						<h5 class="modal-title mb-0">Create Post</h5>
-						<!-- Select -->
-						<div class="col-sm-5">
-							<select class="form-select form-select-sm js-choice" data-placeholder-val="Select type" data-position="top" data-search-enabled="false">
-								<option value="PB">Public</option>
-								<option value="PV">Friends</option>
-								<option value="PV">Only me</option>
-								<option value="PV">Custom</option>
-							</select>
-						</div>
-					</div>
+				<div class="modal-header">
+					<h5 class="modal-title mb-0" id="modalPostLabel">Create Showcase</h5>
 				</div>
 				<!-- Modal header END -->
 
@@ -132,7 +120,7 @@
                     <!-- Modal footer START -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary-soft" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success m-0">Post</button>
+                        <button type="submit" class="btn btn-success m-0">Showcase</button>
                     </div>
                     <!-- Modal footer END -->
                 </form>

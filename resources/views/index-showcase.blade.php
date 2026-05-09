@@ -1,8 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
+
+<!-- =======================Page Banner START -->
+<section class="pt-8">
+    <div class="container position-relative">
+        <div class="row justify-content-center align-items-center text-center">
+            <!-- Content -->
+            <div class="col-lg-6 px-xl-5 text-center mx-auto mb-5 mb-lg-0">
+                <!-- Title -->
+                <h1 class="mb-4">Tunjukkan Karya Gunpla Terbaikmu!</h1>
+
+                <form class="rounded position-relative" method="GET" action="{{ route('search') }}">
+                    <div class="input-group input-group-lg w-100">
+                        <span class="input-group-text bg-white border-0"><i class="bi bi-search"></i></span>
+                        <input class="form-control bg-white border-0" type="search" name="q" placeholder="Cari karya atau user..." aria-label="Search" value="{{ request('q') }}" required>
+                        <button type="submit" class="btn btn-dark mb-0 px-4"><i class="bi bi-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =======================Page Banner END -->
+
 <!-- =======================Page Content START -->
-<section class="pt-8 pb-5">
+<section class="pt-0 pb-5">
     <div class="container">
         <div class="row g-4">
             <!-- Left sidebar START -->
@@ -16,6 +39,11 @@
                 <div class="card card-body p-4 rounded-3 mb-4 shadow-sm border-0" style="background-color: rgba(255, 255, 255, 0.8) !important; backdrop-filter: blur(5px);">
                     <div class="d-flex align-items-center justify-content-between">
                         <h1 class="h4 mb-0 fw-bold text-dark">Semua Showcases</h1>
+                        @auth
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalPost">
+                            <i class="bi bi-plus-lg me-1"></i> Unggah Showcase
+                        </button>
+                        @endauth
                     </div>
                 </div>
 
@@ -103,20 +131,8 @@ function toggleEditMode(postId) {
 				</div>
 
 				<!-- Modal header START -->
-				<div class="modal-header d-block">
-					<div class="d-flex justify-content-between align-items-center">
-						<!-- Title -->
-						<h5 class="modal-title mb-0">Create Post</h5>
-						<!-- Select -->
-						<div class="col-sm-5">
-							<select class="form-select form-select-sm js-choice" data-placeholder-val="Select type" data-position="top" data-search-enabled="false">
-								<option value="PB">Public</option>
-								<option value="PV">Friends</option>
-								<option value="PV">Only me</option>
-								<option value="PV">Custom</option>
-							</select>
-						</div>
-					</div>
+				<div class="modal-header">
+					<h5 class="modal-title mb-0" id="modalPostLabel">Create Showcase</h5>
 				</div>
 				<!-- Modal header END -->
 
@@ -147,7 +163,7 @@ function toggleEditMode(postId) {
                     <!-- Modal footer START -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary-soft" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success m-0">Post</button>
+                        <button type="submit" class="btn btn-success m-0">Showcase</button>
                     </div>
                     <!-- Modal footer END -->
                 </form>

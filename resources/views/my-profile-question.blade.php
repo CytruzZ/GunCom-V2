@@ -47,7 +47,20 @@
 
                             @forelse($userForums as $forum)
 							<!-- Question card START -->
-							<div class="card p-0 z-index-9">
+							<div class="card p-0 z-index-9 position-relative mt-3">
+                                @php
+                                    $categoryColors = [
+                                        'Q&A' => 'bg-info text-white',
+                                        'Build & Custom' => 'bg-warning text-dark',
+                                        'Kits' => 'bg-success text-white',
+                                    ];
+                                    $categoryClass = $categoryColors[$forum->category ?? ''] ?? 'bg-secondary text-white';
+                                @endphp
+                                <div class="position-absolute top-0 end-0 mt-3 me-3 z-index-1">
+                                    <span class="badge {{ $categoryClass }} shadow-sm">
+                                        {{ $forum->category ?? 'Discussion' }}
+                                    </span>
+                                </div>
 								<div class="hstack gap-0 align-items-start">
 
 									<!-- Card body START -->

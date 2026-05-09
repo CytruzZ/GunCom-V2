@@ -36,10 +36,21 @@
 				@if(!isset($currentCategory) && $topShowcases->isNotEmpty())
 				<div class="mb-5">
 					<h4 class="mb-3 fw-bold d-inline-block px-4 py-2 rounded-pill shadow-sm text-white" style="background-color: #00A8A8;">Top Showcases <i class="bi bi-fire text-warning"></i></h4>
-					<div class="d-flex overflow-auto gap-4 pb-3" style="scrollbar-width: thin;">
+					<div class="d-flex overflow-auto gap-4 pb-3" id="topShowcasesSlider" style="scrollbar-width: none; -ms-overflow-style: none;">
+						<style>
+							#topShowcasesSlider::-webkit-scrollbar {
+								display: none;
+							}
+                            #topShowcasesSlider {
+                                cursor: grab;
+                            }
+                            #topShowcasesSlider:active {
+                                cursor: grabbing;
+                            }
+						</style>
 						@foreach($topShowcases as $showcase)
-							<div class="card shadow-sm flex-shrink-0 border-0 rounded-4 overflow-hidden" style="width: 320px; background: #f8f9fa; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#postModal{{ $showcase->id }}">
-								<img src="{{ Str::startsWith($showcase->image, 'http') ? $showcase->image : asset('storage/' . $showcase->image) }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Showcase">
+							<div class="card shadow-sm flex-shrink-0 border-0 rounded-4 overflow-hidden" style="width: 320px; background: #f8f9fa;" data-bs-toggle="modal" data-bs-target="#postModal{{ $showcase->id }}">
+								<img src="{{ Str::startsWith($showcase->image, 'http') ? $showcase->image : asset('storage/' . $showcase->image) }}" class="card-img-top" style="height: 200px; object-fit: cover; pointer-events: none;" alt="Showcase">
 								<div class="card-body p-3">
 									<h6 class="mb-2 text-truncate fw-semibold" title="{{ $showcase->description }}">{{ $showcase->description ?: 'No description' }}</h6>
 									<div class="d-flex justify-content-between align-items-center mt-2">
@@ -70,6 +81,44 @@
 						@endforeach
 					</div>
 				</div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const slider = document.getElementById('topShowcasesSlider');
+                        if (!slider) return;
+
+                        let isDown = false;
+                        let startX;
+                        let scrollLeft;
+
+                        // Drag to scroll
+                        slider.addEventListener('mousedown', (e) => {
+                            isDown = true;
+                            startX = e.pageX - slider.offsetLeft;
+                            scrollLeft = slider.scrollLeft;
+                        });
+                        slider.addEventListener('mouseleave', () => {
+                            isDown = false;
+                        });
+                        slider.addEventListener('mouseup', () => {
+                            isDown = false;
+                        });
+                        slider.addEventListener('mousemove', (e) => {
+                            if (!isDown) return;
+                            e.preventDefault();
+                            const x = e.pageX - slider.offsetLeft;
+                            const walk = (x - startX) * 2; // Kecepatan drag
+                            slider.scrollLeft = scrollLeft - walk;
+                        });
+
+                        // Mouse wheel to scroll horizontally
+                        slider.addEventListener('wheel', (e) => {
+                            if (e.deltaY !== 0) {
+                                e.preventDefault();
+                                slider.scrollLeft += e.deltaY;
+                            }
+                        });
+                    });
+                </script>
 				@endif
 
 				<div class="row">
