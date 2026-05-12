@@ -53,6 +53,7 @@
 															<form action="{{ route('forums.destroy', $forum->id) }}" method="POST" class="m-0" onsubmit="return confirm('Are you sure you want to delete this forum?');">
 																@csrf
 																@method('DELETE')
+																<input type="hidden" name="redirect_to" value="{{ url()->previous() }}">
 																<button type="submit" class="dropdown-item text-danger">
 																	<i class="bi bi-trash fa-fw pe-2"></i>Delete
 																</button>

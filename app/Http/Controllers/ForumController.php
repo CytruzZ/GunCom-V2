@@ -99,7 +99,7 @@ class ForumController extends Controller
         return redirect()->back()->with('success', 'Forum updated successfully!');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $forum = Forum::findOrFail($id);
 
@@ -107,7 +107,16 @@ class ForumController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
+        $showUrl = route('forums.show', $id);
         $forum->delete();
+
+        if ($request->has('redirect_to') && !str_contains($request->redirect_to, $showUrl)) {
+            return redirect($request->redirect_to)->with('success', 'Forum deleted successfully!');
+        }
+
+        if (str_contains(url()->previous(), $showUrl)) {
+            return redirect()->route('index')->with('success', 'Forum deleted successfully!');
+        }
 
         return redirect()->back()->with('success', 'Forum deleted successfully!');
     }
