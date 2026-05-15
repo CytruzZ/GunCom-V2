@@ -19,7 +19,7 @@ class ForumController extends Controller
 
         $forums = $query->latest()->paginate(10);
         $topShowcases = Showcase::with('user')->orderByDesc('likes')->take(5)->get();
-        $topBuilders = User::withCount('buildProjects')->orderByDesc('build_projects_count')->take(5)->get();
+        $topBuilders = User::has('buildProjects')->withCount('buildProjects')->orderByDesc('build_projects_count')->take(5)->get();
         
         $currentCategory = $request->query('category');
         return view('index', compact('forums', 'topShowcases', 'topBuilders', 'currentCategory'));
@@ -29,7 +29,7 @@ class ForumController extends Controller
     {
         $forum = Forum::with(['user', 'comments.user'])->findOrFail($id);
         $topShowcases = Showcase::with('user')->orderByDesc('likes')->take(5)->get();
-        $topBuilders = User::withCount('buildProjects')->orderByDesc('build_projects_count')->take(5)->get();
+        $topBuilders = User::has('buildProjects')->withCount('buildProjects')->orderByDesc('build_projects_count')->take(5)->get();
 
         return view('forum-show', compact('forum', 'topShowcases', 'topBuilders'));
     }

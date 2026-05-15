@@ -66,7 +66,7 @@ class UserController extends Controller
             ->latest()
             ->get();
 
-        $topBuilders = User::withCount('buildProjects')->orderByDesc('build_projects_count')->take(5)->get();
+        $topBuilders = User::has('buildProjects')->withCount('buildProjects')->orderByDesc('build_projects_count')->take(5)->get();
 
         return view('search-results', compact('users', 'showcases', 'forums', 'query', 'topBuilders'));
     }
