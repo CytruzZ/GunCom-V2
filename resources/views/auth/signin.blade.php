@@ -30,6 +30,11 @@
 										{{ session('status') }}
 									</div>
 								@endif
+								@if (session('error'))
+									<div class="alert alert-danger">
+										{{ session('error') }}
+									</div>
+								@endif
 
 								<div class="mb-3">
 									<label class="form-label">Enter email id</label>

@@ -10,7 +10,7 @@ class ShowcaseController extends Controller
     public function index()
     {
         $showcases = Showcase::with(['user', 'comments.user'])->latest()->get();
-        $topShowcases = Showcase::with('user')->orderByDesc('likes')->take(5)->get();
+        $topShowcases = Showcase::with('user')->where('likes', '>', 0)->orderByDesc('likes')->take(5)->get();
         $topBuilders = \App\Models\User::has('buildProjects')->withCount('buildProjects')->orderByDesc('build_projects_count')->take(5)->get();
         
         return view('index-showcase', compact('showcases', 'topShowcases', 'topBuilders'));

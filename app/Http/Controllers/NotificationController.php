@@ -9,7 +9,7 @@ class NotificationController extends Controller
     public function index()
     {
         $notifications = auth()->user()->notifications()->latest()->get();
-        $topShowcases = \App\Models\Showcase::with('user')->orderByDesc('likes')->take(5)->get();
+        $topShowcases = \App\Models\Showcase::with('user')->where('likes', '>', 0)->orderByDesc('likes')->take(5)->get();
         $topBuilders = \App\Models\User::has('buildProjects')->withCount('buildProjects')->orderByDesc('build_projects_count')->take(5)->get();
         
         return view('notifications', compact('notifications', 'topShowcases', 'topBuilders'));
